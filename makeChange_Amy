@@ -1,0 +1,30 @@
+
+# coding: utf-8
+
+# Write code to make change for a purchase.
+# 
+# Your code should accept two parameters: the amount of money offered in cents, and the cost of the item in cents. So you should be able to do make_change(100, 66) to calculate the change required if someone buys something that costs 66 cents using a dollar bill.
+# 
+# Your code should not simply return the total change: it should return the coins required! So make_change(100, 66) should not just return 34! It should return a quarter, a dime and four pennies!
+
+
+import collections
+
+Change = collections.namedtuple('Change', 'quarters dimes nickles pennies')
+
+def makeChange(amtGiven, actualCost):
+    remaining = amtGiven - actualCost
+    if remaining < 0:
+        myChange = "Error: You don't have enough money for this item!"
+    else:
+        myQuarters, remaining = divmod(remaining, 25)
+        myDimes, remaining = divmod(remaining, 10)
+        myNickles, remaining = divmod(remaining, 5)
+        myPennies = remaining
+        myChange = Change(quarters = myQuarters, dimes = myDimes, nickles = myNickles, pennies = myPennies)
+    return myChange
+
+
+
+
+
